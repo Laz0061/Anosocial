@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Şifre Sıfırlama</title>
+  <script>
+    window.onload = () => {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get("token");
+      const type = params.get("type");
+
+      if (token && type === "recovery") {
+        const deepLink = `anosocial://auth/reset#token=${token}`;
+        window.location.replace(deepLink);
+      } else {
+        document.body.innerText = "Geçersiz bağlantı";
+      }
+    };
+  </script>
+</head>
+<body>
+  <p>Şifre sıfırlama bağlantısı doğrulanıyor...</p>
+</body>
+</html>
