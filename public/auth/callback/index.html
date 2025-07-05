@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting...</title>
+    <script>
+      // Sayfa yüklendiğinde deeplink'e yönlendirme yap
+      window.onload = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const type = urlParams.get("type");
+        const token = urlParams.get("access_token");
+
+        let deeplink = "anosocial://auth/callback";
+
+        if (type) {
+          deeplink += `?type=${type}`;
+        }
+
+        if (token) {
+          deeplink += `${type ? "&" : "?"}access_token=${token}`;
+        }
+
+        window.location.replace(deeplink);
+      };
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to app...</p>
+  </body>
+</html>
