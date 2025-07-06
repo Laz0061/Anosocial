@@ -5,21 +5,22 @@
     <title>Redirecting...</title>
     <script>
       window.onload = () => {
-        // search (?), hash (#) parametrelerini birlikte oku
         const searchParams = new URLSearchParams(window.location.search);
         const hashParams = new URLSearchParams(window.location.hash.substring(1));
 
         const type = searchParams.get("type") || hashParams.get("type");
-        const token = searchParams.get("access_token") || hashParams.get("access_token");
+        const token =
+          searchParams.get("access_token") ||
+          hashParams.get("access_token") ||
+          searchParams.get("token") ||
+          hashParams.get("token"); // <-- şifre sıfırlamada gelen token
 
-        // Deeplink URL'sini oluştur
         let deeplink = "anosocial://auth/callback";
         if (type) deeplink += `?type=${encodeURIComponent(type)}`;
         if (token) deeplink += `${type ? "&" : "?"}access_token=${encodeURIComponent(token)}`;
 
         console.log("🔁 Redirecting to:", deeplink);
 
-        // Uygulamayı aç
         window.location.replace(deeplink);
       };
     </script>
